@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class PerfilPage extends StatelessWidget {
+  //ACTIVIDAD PARA LA CLASE
+  // Mediante una función Future, debes cargar la información del usuario Elliot en la clase PersonModel y mostrarla despues de 5 segundos (simulación de una petición lenta al servidor). mientras se trae esta información debes mostrar un CircularProgressIndicator.
+
   @override
   Widget build(BuildContext context) {
     double screenHeigth = MediaQuery.of(context).size.height;
