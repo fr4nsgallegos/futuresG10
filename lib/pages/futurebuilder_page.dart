@@ -7,6 +7,9 @@ class FuturebuilderPage extends StatelessWidget {
     // });
     await Future.delayed(Duration(seconds: 4));
     return "Datos cargados correctamente";
+
+    //descomenta esta linea para simular el error
+    // throw Exception("Error al cargar los datos");
   }
 
   @override
@@ -27,18 +30,25 @@ class FuturebuilderPage extends StatelessWidget {
                   print("Has data: ${snapshot.hasData}");
                   print("Data: ${snapshot.data}");
                   print("-------------------------");
-                  if (snapshot.hasData) {
-                    dynamic respuesta = snapshot.data;
-                    return Text(respuesta);
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return SizedBox(
+                      height: 120,
+                      width: 120,
+                      child: CircularProgressIndicator(
+                        color: Colors.pink,
+                        strokeWidth: 20,
+                      ),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text(
+                      "ERROR: ${snapshot.error}",
+                      style: TextStyle(color: Colors.red),
+                    );
+                  } else if (snapshot.hasData) {
+                    return Text(snapshot.data);
+                  } else {
+                    return Text("Sin datos");
                   }
-                  return SizedBox(
-                    height: 120,
-                    width: 120,
-                    child: CircularProgressIndicator(
-                      color: Colors.pink,
-                      strokeWidth: 20,
-                    ),
-                  );
                 },
               ),
             ],
