@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:futuresg10/models/person_model.dart';
+import 'package:futuresg10/models/popular_works_model.dart';
+import 'package:futuresg10/widgets/works_cotainer_widget.dart';
 
 class PerfilPage extends StatefulWidget {
   @override
@@ -53,175 +55,222 @@ class _PerfilPageState extends State<PerfilPage> {
             ),
             Padding(
               padding: EdgeInsets.only(top: 56, left: 16, right: 16),
-              child: FutureBuilder(
-                future: userFuture,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text("Error: ${snapshot.error}"));
-                  } else if (snapshot.hasData) {
-                    final user = snapshot.data!;
-                    return Align(
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        height: screenHeigth / 4,
-                        width: screenWidth - 40,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(25),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              offset: Offset(0, 5),
-                              blurRadius: 5,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  FutureBuilder(
+                    future: userFuture,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(child: CircularProgressIndicator());
+                      } else if (snapshot.hasError) {
+                        return Center(child: Text("Error: ${snapshot.error}"));
+                      } else if (snapshot.hasData) {
+                        final user = snapshot.data!;
+                        return Align(
+                          alignment: Alignment.topCenter,
+                          child: Container(
+                            height: screenHeigth / 4,
+                            width: screenWidth - 40,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(25),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  offset: Offset(0, 5),
+                                  blurRadius: 5,
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            children: [
-                              Row(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
                                 children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(15),
-                                    child: Image.network(
-                                      "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                                      width: screenWidth / 3,
-                                      height: screenWidth / 3,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 16,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  Row(
                                     children: [
-                                      Text(
-                                        user.name,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20),
-                                      ),
-                                      Text(
-                                        user.jobTitle,
-                                        style: TextStyle(color: Colors.black38),
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(15),
+                                        child: Image.network(
+                                          "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                          width: screenWidth / 3,
+                                          height: screenWidth / 3,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                       SizedBox(
-                                        height: 16,
+                                        width: 16,
                                       ),
-                                      Container(
-                                        width: screenWidth / 2.5,
-                                        padding: EdgeInsets.all(8),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          color: Colors.blue[50],
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Column(
-                                              children: [
-                                                Text("Likes"),
-                                                Text(
-                                                  "${user.likes}",
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20,
-                                                  ),
-                                                )
-                                              ],
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            user.name,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20),
+                                          ),
+                                          Text(
+                                            user.jobTitle,
+                                            style: TextStyle(
+                                                color: Colors.black38),
+                                          ),
+                                          SizedBox(
+                                            height: 16,
+                                          ),
+                                          Container(
+                                            width: screenWidth / 2.5,
+                                            padding: EdgeInsets.all(8),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              color: Colors.blue[50],
                                             ),
-                                            Column(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
-                                                Text("Followers"),
-                                                Text(
-                                                  "${user.followers}",
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                            Column(
-                                              children: [
-                                                Text("Rating"),
-                                                Text(
-                                                  "${user.rating}",
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20,
-                                                  ),
+                                                Column(
+                                                  children: [
+                                                    Text("Likes"),
+                                                    Text(
+                                                      "${user.likes}",
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 20,
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                                Column(
+                                                  children: [
+                                                    Text("Followers"),
+                                                    Text(
+                                                      "${user.followers}",
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 20,
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                                Column(
+                                                  children: [
+                                                    Text("Rating"),
+                                                    Text(
+                                                      "${user.rating}",
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 20,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
-                                          ],
-                                        ),
-                                      )
+                                          )
+                                        ],
+                                      ),
                                     ],
                                   ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: GestureDetector(
-                                      onTap: () {},
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        padding:
-                                            EdgeInsetsDirectional.symmetric(
-                                                vertical: 10),
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              width: 2, color: Colors.black26),
-                                        ),
-                                        child: Text("Chat"),
-                                      ),
-                                    ),
-                                  ),
                                   SizedBox(
-                                    width: 8,
+                                    height: 8,
                                   ),
-                                  Expanded(
-                                    child: GestureDetector(
-                                      onTap: () {},
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        padding:
-                                            EdgeInsetsDirectional.symmetric(
-                                                vertical: 10),
-                                        decoration: BoxDecoration(
-                                            color: Colors.blue,
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: Text(
-                                          "Follow",
-                                          style: TextStyle(color: Colors.white),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: GestureDetector(
+                                          onTap: () {},
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            padding:
+                                                EdgeInsetsDirectional.symmetric(
+                                                    vertical: 10),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  width: 2,
+                                                  color: Colors.black26),
+                                            ),
+                                            child: Text("Chat"),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ),
+                                      SizedBox(
+                                        width: 8,
+                                      ),
+                                      Expanded(
+                                        child: GestureDetector(
+                                          onTap: () {},
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            padding:
+                                                EdgeInsetsDirectional.symmetric(
+                                                    vertical: 10),
+                                            decoration: BoxDecoration(
+                                                color: Colors.blue,
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
+                                            child: Text(
+                                              "Follow",
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
                                 ],
-                              )
-                            ],
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    );
-                  } else {
-                    return Center(child: Text("No data available"));
-                  }
-                },
+                        );
+                      } else {
+                        return Center(child: Text("No data available"));
+                      }
+                    },
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Text(
+                    "Notable works",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                  Text("Based on the opulary articles"),
+                  SizedBox(height: 16),
+                  SizedBox(
+                    height: 300,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        WorksCotainerWidget(
+                            popularWorksModel: PopularWorksModel(
+                                "https://images.pexels.com/photos/29502226/pexels-photo-29502226/free-photo-of-grua-todoterreno-ace-40-xw-de-servicio-pesado-en-el-sitio.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                "Contruction",
+                                "La contrucción de no se que"),
+                            context: context),
+                        WorksCotainerWidget(
+                            popularWorksModel: PopularWorksModel(
+                                "https://images.pexels.com/photos/29502226/pexels-photo-29502226/free-photo-of-grua-todoterreno-ace-40-xw-de-servicio-pesado-en-el-sitio.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                "Contruction",
+                                "La contrucción de no se que"),
+                            context: context),
+                        WorksCotainerWidget(
+                            popularWorksModel: PopularWorksModel(
+                                "https://images.pexels.com/photos/29502226/pexels-photo-29502226/free-photo-of-grua-todoterreno-ace-40-xw-de-servicio-pesado-en-el-sitio.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                "Contruction",
+                                "La contrucción de no se que"),
+                            context: context),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
