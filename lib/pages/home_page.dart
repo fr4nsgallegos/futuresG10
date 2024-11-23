@@ -24,6 +24,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchTitle();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // title = await getTitle(); esto no se puede hacer porque build no puede ser asíncrono
     // getTitle().then((valor) {
