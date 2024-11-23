@@ -19,15 +19,26 @@ class FuturebuilderPage extends StatelessWidget {
             children: [
               FutureBuilder(
                 future: getData(),
-                builder: (context, snapshot) {
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
                   print("-------------------------");
                   print("Snapshot: $snapshot");
                   print("Estado de conexión: ${snapshot.connectionState}");
                   print("ERROR: ${snapshot.error}");
                   print("Has data: ${snapshot.hasData}");
+                  print("Data: ${snapshot.data}");
                   print("-------------------------");
-
-                  return Text("Hola");
+                  if (snapshot.hasData) {
+                    dynamic respuesta = snapshot.data;
+                    return Text(respuesta);
+                  }
+                  return SizedBox(
+                    height: 120,
+                    width: 120,
+                    child: CircularProgressIndicator(
+                      color: Colors.pink,
+                      strokeWidth: 20,
+                    ),
+                  );
                 },
               ),
             ],
