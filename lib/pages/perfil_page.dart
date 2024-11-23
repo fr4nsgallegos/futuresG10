@@ -244,8 +244,9 @@ class _PerfilPageState extends State<PerfilPage> {
                   ),
                   Text("Based on the opulary articles"),
                   SizedBox(height: 16),
-                  SizedBox(
-                    height: 300,
+                  Container(
+                    height: screenHeigth / 4,
+                    // color: Colors.red,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: [
