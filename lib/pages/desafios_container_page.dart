@@ -1,6 +1,23 @@
 import 'package:flutter/material.dart';
 
 class DesafiosContainerPage extends StatelessWidget {
+  Widget fondoGradiente() {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.purple,
+            Colors.pink,
+            const Color.fromARGB(255, 164, 10, 211),
+          ],
+          stops: [0.01, 0.6, 1.0],
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
+        ),
+      ),
+    );
+  }
+
   Widget hContainer() {
     return Container(
       width: 280,
@@ -77,19 +94,68 @@ class DesafiosContainerPage extends StatelessWidget {
     );
   }
 
+  Widget gradiente1() {
+    return Container(
+      width: 250,
+      height: 120,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        gradient: LinearGradient(
+          colors: [Colors.red, Colors.orange], // Gradiente de rojo a naranja
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          stops: [0.25, 0.9],
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.3),
+            offset: Offset(5, 5),
+            blurRadius: 10,
+          ),
+        ],
+      ),
+      padding: EdgeInsets.only(left: 20),
+      alignment: Alignment.centerLeft,
+      child: Text(
+        'Challenge',
+        style: TextStyle(
+          color: Colors.white.withOpacity(0.8),
+          fontSize: 34,
+          fontWeight: FontWeight.w300, // Fuente más delgada (ligera)
+          fontStyle: FontStyle.italic,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Containers desafios"),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            hContainer(),
-            iAmHeader(),
-            barra(),
-          ],
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xff242A6B),
+              // Colors.pink,
+              Color(0xffB63561),
+            ],
+            stops: [0.30, 0.7],
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+          ),
+        ),
+        child: Center(
+          child: Column(
+            children: [
+              // hContainer(),
+              iAmHeader(),
+              barra(),
+              gradiente1(),
+            ],
+          ),
         ),
       ),
     );
